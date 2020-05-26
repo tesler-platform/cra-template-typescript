@@ -1,6 +1,6 @@
 {
   "name": "@tesler-ui/cra-template-typescript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "keywords": [
     "tesler",
@@ -15,6 +15,7 @@
     "type": "git",
     "url": "https://github.com/tesler-platform/cra-template-typescript.git"
   },
+  "main": "template.json",
   "files": [
     "template",
     "template.json"
