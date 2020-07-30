@@ -2,6 +2,10 @@ import {axiosGet, buildUrl} from '@tesler-ui/core'
 import {LoginResponse} from '@tesler-ui/core/interfaces/session'
 import axios from 'axios'
 
+const __API__ = process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_TESLER_API_URL_DEV
+    : process.env.REACT_APP_TESLER_API_URL
+
 const __AJAX_TIMEOUT__ = 900000
 const __CLIENT_ID__: number = Date.now()
 
@@ -22,7 +26,7 @@ export function logout() {
 }
 
 export const axiosInstance = axios.create({
-    // baseURL: process.env.REACT_APP_TESLER_API_URL,
+    baseURL: __API__,
     timeout: __AJAX_TIMEOUT__,
     responseType: 'json',
     headers: {
