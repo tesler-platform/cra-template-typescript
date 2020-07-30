@@ -2,6 +2,8 @@
   "name": "@tesler-ui/cra-template-typescript",
   "version": "0.2.0",
   "license": "Apache-2.0",
+  "homepage": "https://tesler.io/",
+  "author": "Tesler Contributors",
   "keywords": [
     "tesler",
     "tesler-ui",

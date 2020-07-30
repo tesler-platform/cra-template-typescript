@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Build
+
+jobs:
+  assets:
+    name: Create NPM Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          always-auth: true
+      - name: Publish template to NPM
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
