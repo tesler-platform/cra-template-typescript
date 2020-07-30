@@ -1,7 +1,7 @@
 {
     "package": {
       "dependencies": {
-        "@tesler-ui/core": "^1.13.0",
+        "@tesler-ui/core": "^1.18.2",
         "antd": "3.26.13",
         "axios": "0.19.0",
         "react-redux": "^7.2.0",
@@ -14,8 +14,10 @@
         "@types/node": "^12.0.0",
         "@types/react": "^16.9.0",
         "@types/react-dom": "^16.9.0",
+        "@types/react-redux": "^7.1.9",
         "@types/jest": "^25.0.0",
         "typescript": "^3.8.0"
-      }
+      },
+      "proxy": "http://idocs.tesler.io/api/v1/"
     }
   }
