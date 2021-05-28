@@ -1,9 +1,10 @@
 import {CustomEpic, actionTypes} from '../interfaces/actions'
-import { getBasicAuthRequest } from '../api/session'
+import { getBasicAuthRequest, logout } from '../api/session'
 import { LoginResponse } from '@tesler-ui/core/interfaces/session'
 import { Observable } from 'rxjs/Observable'
 import { $do } from '../actions/types'
 import { AxiosError } from 'axios'
+import { historyObj } from '@tesler-ui/core'
 
 const responseStatusMessages: Record<number, string> = {
     401: 'Unauthorized',
@@ -17,6 +18,11 @@ const loginEpic: CustomEpic = (action$, store) => action$.ofType(actionTypes.log
     return getBasicAuthRequest(login, password)
         .mergeMap((data: LoginResponse) => {
             return Observable.of($do.loginDone({
+                activeRole: data.activeRole,
+                roles: data.roles,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                login: data.login,
                 screens: data.screens
             }))
         })
@@ -28,7 +34,17 @@ const loginEpic: CustomEpic = (action$, store) => action$.ofType(actionTypes.log
         })
 })
 
+const logoutEpic: CustomEpic = (action$, store) =>
+    action$.ofType(actionTypes.logout).switchMap(action =>
+        logout().map(() => {
+            const history = historyObj
+            history.action = 'PUSH'
+            history.push('')
+            return $do.logoutDone(null)
+        })
+    )
+
 export const sessionEpics = {
+    logoutEpic,
     loginEpic
 }
-    

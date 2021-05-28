@@ -1,4 +1,4 @@
-import {AnyAction} from '../interfaces/actions'
+import { actionTypes, AnyAction } from '../interfaces/actions'
 import {AppState} from '../interfaces/storeSlices'
 import {Session} from '@tesler-ui/core/interfaces/session'
 
@@ -20,6 +20,13 @@ export default function sessionReducer(
         /**
          * Your reducers for this slice
          */
+        case actionTypes.logout: {
+            return {
+                ...state,
+                loginSpin: false,
+                active: false
+            }
+        }
         default:
             return state
     }

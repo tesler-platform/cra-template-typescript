@@ -1,3 +1,12 @@
+# 0.3.0-alpha0
+
+Depends on @tesler-ui/core@1.29.3-alpha1
+
+## Features
+
+* Login, logout, switch role processes are added
+* DevToolPanel is added
+
 # 0.3.0
 
 ## Features
