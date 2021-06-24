@@ -1,8 +1,9 @@
-import {axiosGet, buildUrl} from '@tesler-ui/core'
-import {LoginResponse} from '@tesler-ui/core/interfaces/session'
-import axios from 'axios'
+import { axiosGet, buildUrl } from '@tesler-ui/core'
+import { LoginResponse } from '@tesler-ui/core/interfaces/session'
+import axios, { AxiosRequestConfig } from 'axios'
+import { keycloak, KEYCLOAK_MIN_VALIDITY } from '../keycloak'
 
-const __API__ = process.env.NODE_ENV === 'development'
+export const __API__ = process.env.NODE_ENV === 'development'
     ? process.env.REACT_APP_TESLER_API_URL_DEV
     : process.env.REACT_APP_TESLER_API_URL
 
@@ -12,25 +13,37 @@ const __CLIENT_ID__: number = Date.now()
 export const HEADERS = { 'Pragma': 'no-cache', 'Cache-Control': 'no-cache, no-store, must-revalidate' }
 
 export function getBasicAuthRequest(login?: string, password?: string) {
-    const hash = login && new Buffer(`${login}:${password}`).toString('base64')
+    const hash = login && new Buffer(`${login}:${password}`).toString('base64') //TODO delete?
     const tzOffset = -(new Date()).getTimezoneOffset() * 60
     const entrypointUrl = `/${window.location.hash}`
     return axiosGet<LoginResponse>(
         buildUrl`login?_tzoffset=${tzOffset}&_entrypointUrl=${entrypointUrl}`,
-        (hash) ? { headers: { Authorization: `Basic ${hash}` } } : {}
+        (hash) ? { headers: { Authorization: `Basic ${hash}` } } : {headers: { Authorization: `Bearer ${keycloak.token}` }}
     )
 }
 
-export function logout() {
-    return axiosGet(buildUrl`logout`)
+function tokenInterceptor(rqConfig: AxiosRequestConfig) {
+    return keycloak.updateToken(KEYCLOAK_MIN_VALIDITY).then(() => {
+        return {
+            ...rqConfig,
+            headers: {
+                ...rqConfig.headers,
+                Authorization: `Bearer ${keycloak.token}`
+            }
+        }
+    })
 }
 
-export const axiosInstance = axios.create({
-    baseURL: __API__,
-    timeout: __AJAX_TIMEOUT__,
-    responseType: 'json',
-    headers: {
-        ...HEADERS,
-        ...{ClientId : __CLIENT_ID__},
-    }
-})
+export function axiosInstance() {
+    const instance = axios.create({
+        baseURL: __API__,
+        timeout: __AJAX_TIMEOUT__,
+        responseType: 'json',
+        headers: {
+            ...HEADERS,
+            ...{ ClientId: __CLIENT_ID__ },
+        }
+    })
+    instance.interceptors.request.use(tokenInterceptor, () => Promise.reject())
+    return instance
+}

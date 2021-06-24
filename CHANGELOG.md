@@ -1,6 +1,18 @@
+# 0.3.0-alpha1
+
+Depends of @tesler-ui/core@1.29.3-alpha2
+
+## Features
+
+*  keycloak is added; `<Login/>` is deleted
+
+## Fixes
+
+* DevToolPanel is depends of `devPanelEnabled` param
+
 # 0.3.0-alpha0
 
-Depends on @tesler-ui/core@1.29.3-alpha1
+Depends of @tesler-ui/core@1.29.3-alpha1
 
 ## Features
 

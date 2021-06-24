@@ -6,13 +6,13 @@ import enUs from 'antd/es/locale-provider/en_US'
 import {reducers} from './reducers'
 import {epics} from './epics'
 import './index.css'
-import { AppLayout } from './components/AppLayout/AppLayout'
+import AppLayout from './components/AppLayout/AppLayout'
 import { axiosInstance } from './api/session'
 
 const App = <Provider
     customReducers={reducers}
     customEpics={epics}
-    axiosInstance={axiosInstance}
+    axiosInstance={axiosInstance()}
 >
     <ConfigProvider locale={enUs}>
         <AppLayout />

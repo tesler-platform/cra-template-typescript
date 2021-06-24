@@ -1,13 +1,14 @@
 import React from 'react'
-import {Layout} from 'antd'
-import {View} from '@tesler-ui/core'
+import { Layout, Spin } from 'antd'
+import { View } from '@tesler-ui/core'
 import AppSider from '../AppSider/AppSider'
 import AppBar from '../AppBar/AppBar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../interfaces/storeSlices'
 import { Card } from '../Card/Card'
 import DevPanel from '../DevPanel/DevPanel'
-import Login  from '../Login/Login'
+import { SSO_AUTH } from '../../actions/types'
+import styles from './AppLayout.module.css'
 
 const skipWidgetTypes = [
     'HeaderWidget',
@@ -15,10 +16,15 @@ const skipWidgetTypes = [
 ]
 
 export const AppLayout: React.FC = () => {
-
     const sessionActive = useSelector((state: AppState) => state.session.active)
+    const logoutRequested = useSelector((state: AppState) => state.session.logout)
+    const dispatch = useDispatch()
 
-    console.warn(process.env.REACT_APP_TESLER_API_URL)
+    React.useEffect(() => {
+        if (!sessionActive && !logoutRequested) {
+            dispatch({type: SSO_AUTH})
+        }
+    }, [sessionActive, logoutRequested, dispatch])
 
     return sessionActive
         ? <Layout>
@@ -34,7 +40,7 @@ export const AppLayout: React.FC = () => {
                     <View card={ Card as any } skipWidgetTypes={ skipWidgetTypes }/>
                 </Layout.Content>
             </Layout></Layout>
-        : <Login/>
+        : <div className={styles.spinContainer}><Spin size="large"/></div>
 }
 
 export default React.memo(AppLayout)

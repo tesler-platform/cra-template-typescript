@@ -1,8 +1,8 @@
-import React from "react";
-import { Menu } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../../../interfaces/storeSlices";
-import { $do } from "@tesler-ui/core";
+import React from 'react'
+import { Menu } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppState } from '../../../../interfaces/storeSlices'
+import { $do } from '@tesler-ui/core'
 
 export const UserMenuContent: React.FC = () => {
     const {firstName, lastName, login, activeRole, roles} = useSelector((state: AppState) => {return {
@@ -14,7 +14,7 @@ export const UserMenuContent: React.FC = () => {
     }})
     const dispatch = useDispatch()
     const createSwitchRoleHandler = React.useCallback((roleKey: string) => () => dispatch($do.switchRole({role: roleKey})), [dispatch])
-    const handleLogout= React.useCallback(() => dispatch($do.logout(null)), [dispatch])
+    const handleLogout = React.useCallback(() => dispatch($do.logout(null)), [dispatch])
     const userName = `${firstName} ${lastName}`
     const activeRoleValue = roles?.find(i => i.key === activeRole)?.value
     return <Menu>
