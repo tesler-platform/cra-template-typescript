@@ -1,4 +1,5 @@
 import React from 'react'
+import './imports/rxjs'
 import {render} from 'react-dom'
 import {Provider} from '@tesler-ui/core'
 import {ConfigProvider} from 'antd'

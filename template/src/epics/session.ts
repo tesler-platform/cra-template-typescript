@@ -24,6 +24,7 @@ const ssoAuthEpic: Epic<AnyAction, AppState> = (action$, store) =>
     })
 
 const loginEpic: CustomEpic = (action$, store) => action$.ofType(actionTypes.login)
+.filter(action => !action.payload?.role)
 .switchMap((action) => {
     const login = action.payload && action.payload.login
     const password = action.payload && action.payload.password

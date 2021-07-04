@@ -1,3 +1,18 @@
+# 0.3.0-alpha2
+
+Depends of @tesler-ui/core@1.29.3-alpha4
+
+## Features
+
+* `<Operations/>` draft is added
+
+## Fixes
+
+* Second login request during role switching process is prevented
+* DevToolPanel doesn't disappear after meta-data refreshing
+* `rxjs` imports are added
+* `template.json`: `homepage` is set to `.`
+
 # 0.3.0-alpha1
 
 Depends of @tesler-ui/core@1.29.3-alpha2
