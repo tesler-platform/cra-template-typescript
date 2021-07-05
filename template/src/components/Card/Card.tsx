@@ -1,10 +1,11 @@
 import React from 'react'
-import { buildBcUrl, WidgetTypes } from '@tesler-ui/core'
+import { buildBcUrl, TemplatedTitle, WidgetTypes } from '@tesler-ui/core'
 import { WidgetMeta } from '@tesler-ui/core/interfaces/widget'
 import { Col, Row } from 'antd'
 import Operations from '../Operations/Operations'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../interfaces/storeSlices'
+import styles from './Card.module.css'
 
 export interface CardOwnProps {
     children: React.ReactNode,
@@ -21,7 +22,8 @@ export const Card: React.FC<CardOwnProps> = (props) => {
 
     return <Row justify="center">
         <Col span={ 22 } offset={1}>
-            <div>
+            <div className={styles.container}>
+                <h2><TemplatedTitle widgetName={ meta.name } title={ meta.title }/></h2>
                 { type === WidgetTypes.Form && props.children }
                 {showOperations.includes(type as WidgetTypes)
                 && <Operations

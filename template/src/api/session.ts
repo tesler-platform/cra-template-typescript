@@ -2,10 +2,7 @@ import { axiosGet, buildUrl } from '@tesler-ui/core'
 import { LoginResponse } from '@tesler-ui/core/interfaces/session'
 import axios, { AxiosRequestConfig } from 'axios'
 import { keycloak, KEYCLOAK_MIN_VALIDITY } from '../keycloak'
-
-export const __API__ = process.env.NODE_ENV === 'development'
-    ? process.env.REACT_APP_TESLER_API_URL_DEV
-    : process.env.REACT_APP_TESLER_API_URL
+import { __API__ } from '../constants/constants'
 
 const __AJAX_TIMEOUT__ = 900000
 const __CLIENT_ID__: number = Date.now()

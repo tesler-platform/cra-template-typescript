@@ -1,3 +1,10 @@
+# 0.3.0-alpha3
+
+## Fixes
+
+* Card styles are fixed
+* `constants` module is added
+
 # 0.3.0-alpha2
 
 Depends of @tesler-ui/core@1.29.3-alpha4
