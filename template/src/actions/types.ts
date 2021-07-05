@@ -5,6 +5,8 @@ import {ActionPayloadTypes as TeslerActionPayloadTypes, createActionCreators} fr
 
 const z = null as any
 
+export const SSO_AUTH = 'SSO_AUTH'
+
 /**
  * Declare your redux actions here with action name and payload type
  *
@@ -20,9 +22,9 @@ export class CustomActionTypes extends TeslerActionPayloadTypes {
         customMessage: string
     } = z
 
-     /**
-      * You can expand payload of internal tesler-ui actions:
-      */
+    /**
+     * You can expand payload of internal tesler-ui actions:
+     */
     changeLocation: TeslerActionPayloadTypes['changeLocation'] & {
         customPayloadField?: number
     } = z
@@ -30,7 +32,7 @@ export class CustomActionTypes extends TeslerActionPayloadTypes {
 
 /**
  * Action creator helper allowing to create action typed actions:
- * 
+ *
  * $do.customAction({ customMessage: 'test '}) will result in:
  * { type: 'customAction', payload: { customMessage: 'test' } }
  */

@@ -1,25 +1,43 @@
-import {AnyAction} from '../interfaces/actions'
+import { actionTypes, AnyAction } from '../interfaces/actions'
 import {AppState} from '../interfaces/storeSlices'
 import {Session} from '@tesler-ui/core/interfaces/session'
+
+export type CustomSession = Session & { logout: boolean }
 
 /**
  * Your initial state for this slice
  */
-export const initialState: Session = {
+export const initialState: CustomSession = {
     active: false,
     screens: [],
-    loginSpin: false
+    loginSpin: false,
+    logout: false
 }
 
 export default function sessionReducer(
-    state: Session = initialState,
+    state: CustomSession = initialState,
     action: AnyAction,
     store?: Readonly<AppState>
-): Session {
+): CustomSession {
     switch (action.type) {
         /**
          * Your reducers for this slice
          */
+        case actionTypes.logout: {
+            return {
+                ...state,
+                loginSpin: false,
+                active: false,
+                logout: true
+            }
+        }
+        case actionTypes.loginDone: {
+            return {
+                ...state,
+                active: true,
+                logout: false
+            }
+        }
         default:
             return state
     }

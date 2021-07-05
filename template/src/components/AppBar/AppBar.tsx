@@ -1,9 +1,12 @@
 import React from 'react'
 import { ViewNavigation } from '../ViewNavigation/ViewNavigation'
+import UserMenu from './components/UserMenu/UserMenu'
+import styles from './AppBar.module.css'
 
 export const AppBar: React.FC = () => {
-    return <header>
+    return <header className={styles.container}>
         <ViewNavigation />
+        <UserMenu/>
     </header>
 }
 
