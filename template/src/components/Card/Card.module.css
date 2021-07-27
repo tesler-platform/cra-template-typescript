@@ -1,6 +1,8 @@
 .container {
     background-color: white;
     border-radius: 2px;
+    padding: 10px;
+    margin-top: 16px;
 }
 
 .container :global(.ant-table .ant-table-thead > tr > th) {
