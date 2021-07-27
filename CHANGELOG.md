@@ -1,4 +1,8 @@
-# 0.3.0-alpha3
+# 0.3.0-alpha4
+
+## Misc
+
+* @tesler-ui/core@1.30.3
 
 ## Fixes
 

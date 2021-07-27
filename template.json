@@ -1,7 +1,7 @@
 {
     "package": {
       "dependencies": {
-        "@tesler-ui/core": "1.29.3-alpha4",
+        "@tesler-ui/core": "1.30.3",
         "@testing-library/jest-dom": "^5.13.0",
         "@testing-library/react": "^10.4.9",
         "@testing-library/user-event": "^10.4.1",
