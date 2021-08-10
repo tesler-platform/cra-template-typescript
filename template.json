@@ -23,6 +23,9 @@
         "rxjs": "^5.5.12",
         "typescript": "^3.9.9"
       },
+      "devDependencies": {
+        "http-proxy-middleware": "^2.0.1"
+      },
       "homepage": ".",
       "scripts": {
         "build": "react-scripts build && npm run rename",
