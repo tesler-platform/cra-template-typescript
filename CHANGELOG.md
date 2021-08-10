@@ -1,3 +1,9 @@
+# 0.5.0
+
+## Features
+
+* proxy is added ([#4](https://github.com/tesler-platform/cra-template-typescript/pull/4))
+
 # 0.4.0
 
 ## Features
