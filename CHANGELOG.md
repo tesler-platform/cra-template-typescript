@@ -1,3 +1,9 @@
+# 0.6.0
+
+## Misc
+
+* Upgrade @tesler-ui/core 1.30.4
+
 # 0.5.0
 
 ## Features
