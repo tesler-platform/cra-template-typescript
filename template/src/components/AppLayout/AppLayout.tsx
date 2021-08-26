@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import { Layout, Spin } from 'antd'
-import { View } from '@tesler-ui/core'
+import { View, ErrorPopup } from '@tesler-ui/core'
 import AppSider from '../AppSider/AppSider'
 import AppBar from '../AppBar/AppBar'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../interfaces/storeSlices'
 import { Card } from '../Card/Card'
 import DevPanel from '../DevPanel/DevPanel'
-import { SSO_AUTH } from '../../actions/types'
+import { $do, SSO_AUTH } from '../../actions/types'
 import styles from './AppLayout.module.css'
 
 const skipWidgetTypes = [
@@ -18,6 +18,7 @@ const skipWidgetTypes = [
 export const AppLayout: React.FC = () => {
     const sessionActive = useSelector((state: AppState) => state.session.active)
     const logoutRequested = useSelector((state: AppState) => state.session.logout)
+    const error = useSelector((state: AppState) => state.view.error)
     const dispatch = useDispatch()
 
     React.useEffect(() => {
@@ -26,9 +27,14 @@ export const AppLayout: React.FC = () => {
         }
     }, [sessionActive, logoutRequested, dispatch])
 
+    const handleError = useCallback(() => {
+        dispatch($do.closeViewError(null))
+    }, [dispatch])
+
     return sessionActive
         ? <Layout>
             <DevPanel/>
+            {error && <ErrorPopup error={error} onClose={handleError} />}
             <Layout>
                 <Layout.Sider>
                     <AppSider/>
