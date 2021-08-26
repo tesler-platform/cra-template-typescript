@@ -1,3 +1,9 @@
+# 0.7.0
+
+## Features
+
+* `<ErrorPopup />` now included in `<AppLayout />` to handle Tesler API business exceptions
+
 # 0.6.0
 
 ## Misc
@@ -19,7 +25,6 @@
 * DevToolPanel is added;
 * rxjs imports are added;
 * template.json: homepage is set to `.`
-
 
 # 0.3.0
 
