@@ -1,3 +1,9 @@
+# 0.7.1
+
+## Fixes
+
+* `@tesler-ui/core` dependendency should not be strict
+
 # 0.7.0
 
 ## Features
@@ -8,7 +14,7 @@
 
 ## Misc
 
-* Upgrade @tesler-ui/core 1.30.4
+* Upgrade `@tesler-ui/core` 1.30.4
 
 # 0.5.0
 
